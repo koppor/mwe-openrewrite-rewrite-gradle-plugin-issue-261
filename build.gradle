@@ -1,6 +1,4 @@
 import org.gradle.internal.os.OperatingSystem
-import org.jabref.build.xjc.XjcPlugin
-import org.jabref.build.xjc.XjcTask
 
 plugins {
     id 'application'
@@ -32,8 +30,6 @@ plugins {
 
 // Enable following for debugging
 // gradle.startParameter.showStacktrace = org.gradle.api.logging.configuration.ShowStacktrace.
-
-apply plugin: XjcPlugin
 
 apply from: 'eclipse.gradle'
 
@@ -254,9 +250,6 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-library:2.2"
 
     checkstyle 'com.puppycrawl.tools:checkstyle:10.12.7'
-    // xjc needs the runtime as well for the ant task, otherwise it fails
-    xjc group: 'org.glassfish.jaxb', name: 'jaxb-xjc', version: '3.0.2'
-    xjc group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '3.0.2'
 
     rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:2.6.2"))
     rewrite("org.openrewrite.recipe:rewrite-static-analysis")
@@ -301,8 +294,7 @@ processResources {
 
 tasks.register('generateSource') {
     dependsOn("generateBstGrammarSource",
-            "generateSearchGrammarSource",
-            "generateCitaviSource")
+            "generateSearchGrammarSource")
     group = 'JabRef'
     description 'Generates all necessary (Java) source files.'
 }
@@ -351,15 +343,6 @@ tasks.register("generatePredatoryJournalListMV", JavaExec) {
 
 jar.dependsOn("generateJournalListMV", "generatePredatoryJournalListMV")
 compileTestJava.dependsOn("generateJournalListMV","generatePredatoryJournalListMV")
-
-tasks.register('generateCitaviSource', XjcTask) {
-    group = 'JabRef'
-    description = "Generates java files for the citavi importer."
-
-    schemaFile = "src/main/resources/xjc/citavi/citavi.xsd"
-    outputDirectory = "src-gen/main/java/"
-    javaPackage = "org.jabref.logic.importer.fileformat.citavi"
-}
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
