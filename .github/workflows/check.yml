@@ -30,11 +30,14 @@ jobs:
       - name: Run OpenRewrite
         run: |
           ./gradlew rewriteDryRun
-      - uses: awalsh128/cache-apt-pkgs-action@latest
+      - name: Install colordiff
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        if: failure()
         with:
           packages: colordiff
           version: 1.0
       - name: Output patch
+        if: failure()
         run: |
           if [ -f "/home/runner/work/mwe-openrewrite-rewrite-gradle-plugin-issue-261/mwe-openrewrite-rewrite-gradle-plugin-issue-261/build/reports/rewrite/rewrite.patch" ]; then
             colordiff < /home/runner/work/mwe-openrewrite-rewrite-gradle-plugin-issue-261/mwe-openrewrite-rewrite-gradle-plugin-issue-261/build/reports/rewrite/rewrite.patch
