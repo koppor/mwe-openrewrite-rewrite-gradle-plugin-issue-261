@@ -1,6 +1,6 @@
 plugins {
-    id 'java'
-    id 'org.openrewrite.rewrite' version '6.8.1'
+    id("java")
+    id("org.openrewrite.rewrite") version "6.8.1"
 }
 
 repositories {
@@ -8,12 +8,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.slf4j:slf4j-api:2.0.11'
+    implementation("org.slf4j:slf4j-api:2.0.11")
 }
 
 rewrite {
     activeRecipe(
-        'org.jabref.config.rewrite.cleanup'
+        "org.jabref.config.rewrite.cleanup"
     )
     exclusion (
         "build.gradle"
