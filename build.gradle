@@ -8,7 +8,6 @@ version = '100.0.0'
 
 application {
     mainClass.set('org.jabref.cli.Launcher')
-    mainModule.set('org.jabref')
 }
 
 repositories {
