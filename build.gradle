@@ -23,8 +23,6 @@ plugins {
 // Enable following for debugging
 // gradle.startParameter.showStacktrace = org.gradle.api.logging.configuration.ShowStacktrace.
 
-apply from: 'eclipse.gradle'
-
 group = "org.jabref"
 version = project.findProperty('projVersion') ?: '100.0.0'
 
