@@ -2,15 +2,6 @@ import org.gradle.internal.os.OperatingSystem
 
 plugins {
     id 'application'
-
-    id 'me.champeau.jmh' version '0.7.2'
-
-    id 'org.beryx.jlink' version '3.0.1'
-
-    // nicer test outputs during running and completion
-    // Homepage: https://github.com/radarsh/gradle-test-logger-plugin
-    id 'com.adarshr.test-logger' version '4.0.0'
-
     id 'org.openrewrite.rewrite' version '6.7.0'
 }
 
