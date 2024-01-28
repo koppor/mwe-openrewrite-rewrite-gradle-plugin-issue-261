@@ -16,7 +16,7 @@ rewrite {
         'org.jabref.config.rewrite.cleanup'
     )
     exclusion (
-        "build.gradle",
+        "build.gradle"
     )
     failOnDryRunResults = true
 }
