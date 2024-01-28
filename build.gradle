@@ -3,8 +3,6 @@ import org.gradle.internal.os.OperatingSystem
 plugins {
     id 'application'
 
-    id 'com.github.andygoossens.modernizer' version '1.9.0'
-
     id 'me.champeau.jmh' version '0.7.2'
 
     id 'org.beryx.jlink' version '3.0.1'
