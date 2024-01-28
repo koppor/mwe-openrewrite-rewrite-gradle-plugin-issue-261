@@ -9,13 +9,7 @@ version = '100.0.0'
 java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
-    // Workaround needed for Eclipse, probably because of https://github.com/gradle/gradle/issues/16922
-    // Should be removed as soon as Gradle 7.0.1 is released ( https://github.com/gradle/gradle/issues/16922#issuecomment-828217060 )
-
     toolchain {
-        // If this is updated, also update
-        // - .devcontainer/devcontainer.json#L34 and
-        // - .gitpod.Dockerfile
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
@@ -46,17 +40,6 @@ rewrite {
     )
     exclusion (
         "build.gradle",
-        "buildSrc/build.gradle",
-        "eclipse.gradle",
-        "settings.gradle",
-        "src-gen/**",
-        "src/main/resources/**",
-        "src/test/resources/**",
-        "**/module-info.java",
-        "**/*.py",
-        "**/*.xml",
-        "**/*.yml"
     )
-    plainTextMask("**/*.md")
     failOnDryRunResults = true
 }
