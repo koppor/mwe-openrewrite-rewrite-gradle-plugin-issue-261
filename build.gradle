@@ -15,8 +15,6 @@ plugins {
     // Homepage: https://github.com/radarsh/gradle-test-logger-plugin
     id 'com.adarshr.test-logger' version '4.0.0'
 
-    id 'jacoco'
-
     id 'org.openrewrite.rewrite' version '6.7.0'
 }
 
@@ -78,18 +76,6 @@ repositories {
     maven { url 'https://sandec.jfrog.io/artifactory/repo' }
 }
 
-configurations {
-    antlr4
-}
-
-dependencyLocking {
-    lockAllConfigurations()
-}
-
-jacoco {
-    toolVersion = "0.8.10"
-}
-
 dependencies {
     // Include all jar-files in the 'lib' folder as dependencies
     implementation fileTree(dir: 'lib', includes: ['*.jar'])
@@ -121,33 +107,6 @@ dependencies {
     implementation 'io.github.java-diff-utils:java-diff-utils:4.12'
     implementation 'info.debatty:java-string-similarity:2.0.0'
     implementation 'com.github.javakeyring:java-keyring:1.0.4'
-
-    antlr4 'org.antlr:antlr4:4.13.1'
-    implementation 'org.antlr:antlr4-runtime:4.13.1'
-
-    implementation group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '6.8.0.202311291450-r'
-
-    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.16.1'
-    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.16.1'
-
-    implementation 'com.fasterxml:aalto-xml:1.3.2'
-
-    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.9'
-
-    implementation 'org.postgresql:postgresql:42.7.1'
-
-    implementation ('com.oracle.ojdbc:ojdbc10:19.3.0.0') {
-        // causing module issues
-        exclude module: 'oraclepki'
-    }
-
-    implementation ('com.google.guava:guava:33.0.0-jre') {
-        // TODO: Remove this as soon as https://github.com/google/guava/issues/2960 is fixed
-        exclude module: "jsr305"
-    }
-
-    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
-    implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
 
     implementation('org.jabref:afterburner.fx:2.0.0')
     implementation 'org.kordamp.ikonli:ikonli-javafx:12.3.1'
