@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'org.openrewrite.rewrite' version '6.7.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:2.0.11'
+}
+
+rewrite {
+    activeRecipe(
+        'org.jabref.config.rewrite.cleanup'
+    )
+    exclusion (
+        "build.gradle",
+    )
+    failOnDryRunResults = true
+}

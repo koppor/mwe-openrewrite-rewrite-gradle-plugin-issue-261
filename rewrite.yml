@@ -1,0 +1,6 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.jabref.config.rewrite.cleanup
+recipeList:
+recipeList:
+  - org.openrewrite.java.search.FindMissingTypes
