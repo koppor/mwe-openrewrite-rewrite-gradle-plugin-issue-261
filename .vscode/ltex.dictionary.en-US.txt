@@ -1,5 +1,0 @@
-Checkstyle
-CouchDB
-JabDrive
-JabRef
-OpenRewrite
