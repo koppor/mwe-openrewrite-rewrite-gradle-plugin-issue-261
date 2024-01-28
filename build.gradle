@@ -7,8 +7,6 @@ plugins {
 
     id 'me.champeau.jmh' version '0.7.2'
 
-    id 'org.javamodularity.moduleplugin' version '1.8.12'
-
     id 'org.beryx.jlink' version '3.0.1'
 
     // nicer test outputs during running and completion
@@ -29,7 +27,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
     // Workaround needed for Eclipse, probably because of https://github.com/gradle/gradle/issues/16922
     // Should be removed as soon as Gradle 7.0.1 is released ( https://github.com/gradle/gradle/issues/16922#issuecomment-828217060 )
-    modularity.inferModulePath.set(false)
 
     toolchain {
         // If this is updated, also update
@@ -43,10 +40,6 @@ application {
     mainClass.set('org.jabref.cli.Launcher')
     mainModule.set('org.jabref')
 }
-
-// Workaround for https://github.com/openjfx/javafx-gradle-plugin/issues/89
-// See also https://github.com/java9-modularity/gradle-modules-plugin/issues/165
-modularity.disableEffectiveArgumentsAdjustment()
 
 sourceSets {
     main {
