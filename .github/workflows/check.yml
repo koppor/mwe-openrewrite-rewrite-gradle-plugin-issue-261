@@ -1,0 +1,32 @@
+name: Check
+
+on:
+  push:
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.head_ref || github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  openrewrite:
+    name: OpenRewrite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          show-progress: 'false'
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21.0.1
+          distribution: 'liberica'
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Run OpenRewrite
+        run: |
+          ./gradlew rewriteDryRun
