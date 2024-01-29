@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'application'
     id 'org.openrewrite.rewrite' version '6.8.1'
 }
 
@@ -9,6 +9,10 @@ repositories {
 
 dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.11'
+}
+
+application {
+    mainClass = 'example.Main'
 }
 
 rewrite {

@@ -1,8 +1,8 @@
-package org.jabref.cli;
+package example;
 
 import org.slf4j.Logger;
 
-public class Launcher {
+public class Main {
     private static Logger LOGGER;
 
     public static void main(String[] args) {
