@@ -36,8 +36,10 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'liberica'
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - run: ./gradlew --version
+        uses: gradle/actions/setup-gradle@v3-beta
+        with:
+          gradle-version: 6.9.4
+      - run: gradle --version
       - name: Run OpenRewrite
         run: |
           ./gradlew rewriteDryRun -DactiveRecipe=org.openrewrite.java.search.FindMissingTypes
