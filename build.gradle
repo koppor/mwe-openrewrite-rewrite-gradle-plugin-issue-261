@@ -13,7 +13,7 @@ dependencies {
 
 rewrite {
     activeRecipe(
-        'org.jabref.config.rewrite.cleanup'
+        'custom'
     )
     failOnDryRunResults = true
 }
