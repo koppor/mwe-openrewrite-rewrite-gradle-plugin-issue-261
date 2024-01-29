@@ -42,7 +42,7 @@ jobs:
       - run: gradle --version
       - name: Run OpenRewrite
         run: |
-          ./gradlew rewriteDryRun -DactiveRecipe=org.openrewrite.java.search.FindMissingTypes
+          gradle rewriteDryRun -DactiveRecipe=org.openrewrite.java.search.FindMissingTypes
       - name: Install colordiff
         uses: awalsh128/cache-apt-pkgs-action@latest
         if: failure()
