@@ -19,10 +19,15 @@ jobs:
     strategy:
       matrix:
         java-version:
+          - 8
           - 11
           - 16
           - 17
           - 21
+        gradle-version:
+          - 6.9.4
+          - 8.5
+          - 7.6.2
       fail-fast: false
     steps:
       - name: Checkout source
@@ -38,7 +43,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3-beta
         with:
-          gradle-version: 6.9.4
+          gradle-version: ${{ matrix.gradle-version }}
       - run: gradle --version
       - name: Run OpenRewrite
         run: |
