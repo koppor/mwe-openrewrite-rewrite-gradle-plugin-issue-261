@@ -1,3 +1,3 @@
 open module example {
-    requries org.lsf4j;
+    requires org.slf4j;
 }
