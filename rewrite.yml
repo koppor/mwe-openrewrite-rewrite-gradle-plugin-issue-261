@@ -1,5 +1,0 @@
----
-type: specs.openrewrite.org/v1beta/recipe
-name: custom
-recipeList:
-  - org.openrewrite.java.search.FindMissingTypes

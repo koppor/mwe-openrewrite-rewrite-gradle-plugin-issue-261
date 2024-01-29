@@ -12,8 +12,5 @@ dependencies {
 }
 
 rewrite {
-    activeRecipe(
-        'custom'
-    )
     failOnDryRunResults = true
 }
