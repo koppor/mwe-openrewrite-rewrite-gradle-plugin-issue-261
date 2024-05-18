@@ -1,0 +1,62 @@
+name: Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.head_ref || github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  openrewrite:
+    name: OpenRewrite
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version:
+          - 11
+          - 17
+          - 18
+          - 19
+        gradle-version:
+          - 7.6.2
+          - 8.5
+      fail-fast: false
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          show-progress: 'false'
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'liberica'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3-beta
+        with:
+          gradle-version: ${{ matrix.gradle-version }}
+      - run: gradle --version
+      - name: Run OpenRewrite
+        run: |
+          gradle rewriteDryRun -DactiveRecipe=org.openrewrite.java.search.FindMissingTypes
+      - name: Install colordiff
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        if: failure()
+        with:
+          packages: colordiff
+          version: 1.0
+      - name: Output patch
+        if: failure()
+        run: |
+          if [ -f "/home/runner/work/mwe-openrewrite-rewrite-gradle-plugin-issue-261/mwe-openrewrite-rewrite-gradle-plugin-issue-261/build/reports/rewrite/rewrite.patch" ]; then
+            colordiff < /home/runner/work/mwe-openrewrite-rewrite-gradle-plugin-issue-261/mwe-openrewrite-rewrite-gradle-plugin-issue-261/build/reports/rewrite/rewrite.patch
+          else
+            echo "No patch generated."
+          fi
